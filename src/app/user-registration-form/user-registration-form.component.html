@@ -4,15 +4,24 @@
     </mat-card-header>
     <mat-card-content>
         <form>
+            <!-- use a mat-form-field for each input -->
             <mat-form-field>
                 <input matInput [(ngModel)]="userData.Username" placeholder="Username" type="text" name="Username"
                     required>
+            </mat-form-field>
+            <mat-form-field>
                 <input matInput [(ngModel)]="userData.Password" placeholder="password" type="text" name="Password"
                     required>
-                <input matInput [(ngModel)]="userData.Email" placeholder="Email" type="Email" name="Email" required>
-                <input matInput [(ngModel)]="userData.Birthday" placeholder="Birthday" type="date" name="Birthday">
-
             </mat-form-field>
+            <mat-form-field>
+                <input matInput [(ngModel)]="userData.Email" placeholder="Email" type="Email" name="Email" required>
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput [(ngModel)]="userData.Birthday" placeholder="Birthday" type="date" name="Birthday">
+            </mat-form-field>
+
+
+
         </form>
     </mat-card-content>
     <mat-card-actions>

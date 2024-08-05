@@ -1,7 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { FetchApiDataService } from '../fetch-api-data.service';// this brings in the api calls
-import { MatSnackBar } from '@angular/material/snack-bar';// this is the display notifications "alerts"
-import { MatDialogRef } from '@angular/material/dialog';// this is used to close the dialog on success
+// this brings in the api calls
+import { FetchApiDataService } from '../fetch-api-data.service';
+// this is the display notifications "alerts"
+import { MatSnackBar } from '@angular/material/snack-bar';
+// this is used to close the dialog on success
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-user-registration-form',
