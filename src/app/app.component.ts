@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-//import { MovieCardComponent } from './movie-card/movie-card.component';
 
 
 @Component({
@@ -9,11 +8,4 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'myFlix-Angular-client';
-
-  // openMoviesDialog(): void {
-  //   this.dialog.open(MovieCardComponent, {
-  //     width: '600px'
-  //   });
-  // }
-
 }

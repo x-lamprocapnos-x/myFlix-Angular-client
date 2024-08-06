@@ -23,6 +23,7 @@ const appRoutes: Routes = [
   { path: 'welcome', component: WelcomePageComponent },
   { path: 'movies', component: MovieCardComponent },
   { path: '', redirectTo: 'welcome', pathMatch: 'prefix' },
+  // { path: 'profile', component: ProfileViewComponent}
 ];
 @NgModule({
   declarations: [
