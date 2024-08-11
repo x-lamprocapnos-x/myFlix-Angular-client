@@ -1,1 +1,31 @@
-<p>profile-view works!</p>
+<div class="profile-container">
+    <h2>{{ userDetails.userName}}'s Profile</h2>
+
+    <div class="profile-details">
+        <p><strong>Email:</strong>{{userDetails.email}}</p>
+        <p><strong>Birthday:</strong>{{userDetails.birthDate | date}} </p>
+
+        <button mat-raised-button color="primary" (click)="updateUser()">
+            Update Profile
+        </button>
+        <button mat-raised-button color="primary" (click)="resetUser()">
+            Reset Changes
+        </button>
+    </div>
+
+    <div class="favorite-movies">
+        <h3> Your Favorite Movies</h3>
+        <mat-list>
+            <mat-list-item *ngFor="let movie of favoriteMovies">
+                <h4 matLine>{{movie.Title}} </h4>
+                <button mat-icon-button color="warm" (click)="removeFavoriteMovie(movie)">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </mat-list-item>
+        </mat-list>
+    </div>
+
+    <button mat-raised-button color="accent" (click)="returnToMovies()">
+        Back to Movies
+    </button>
+</div>
