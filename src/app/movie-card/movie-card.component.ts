@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
 import { FetchApiDataService } from '../fetch-api-data.service';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
@@ -10,6 +10,9 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class MovieCardComponent {
   movies: any[] = [];
+
+  @ViewChild('dialogTemplate') dialogTemplate!: TemplateRef<any>;
+
   constructor(
     public fetchApiData: FetchApiDataService,
     public router: Router,
@@ -31,16 +34,52 @@ export class MovieCardComponent {
       this.movies.forEach((movie: any) => {
         movie.isFavorite = user.favoriteMovies.includes(movie._id)
       })
-      return this.movies;
     }, error => {
       console.error(error)
     })
   }
 
-  openMoviesDialog(): void {
+  openMoviesDialog(movie: any, type: string): void {
+    const data = {
+      title: movie.Title,
+      type: type,
+      content: type === 'genre' ? movie.Genre.Name : type === 'director' ? movie.Director.Name : movie.Description
+    };
     this.dialog.open(MovieCardComponent, {
-      width: '600px'
+      width: '600px',
+      data: data
     });
   }
 
+  redirectProfile(): void {
+    this.router.navigate(['profile']);
+  }
+
+
+  toggleFavorite(movie: any): void {
+    const user = JSON.parse(localStorage.getItem('user') || '');
+    const isFavorite = user.favoriteMovies.includes(movie._id);
+
+    if (isFavorite) {
+      this.fetchApiData.deleteFavoriteMovie(user.userName, movie._id).subscribe(
+        (result: any) => {
+          // update local storage and ui
+          user.favoriteMovies = result.favoriteMovies;
+          localStorage.setItem('user', JSON.stringify(user));
+          movie.isFavorite = false;
+        }, (error: any) => {
+          console.error('Error removing favorite movie:', error);
+        });
+    } else {
+      this.fetchApiData.addFavoriteMovie(user.userName, movie._id).subscribe(
+        (result: any) => {
+          // update local storage and ui
+          user.favoriteMovies = result.favoriteMovies;
+          localStorage.setItem('user', JSON.stringify(user));
+          movie.isFavorite = true;
+        }, (error: any) => {
+          console.error('Error adding favorite movie:', error);
+        });
+    }
+  }
 }

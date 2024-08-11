@@ -9,16 +9,31 @@
         </mat-card-header>
         <img src={{movie.ImagePath}} alt={{movie.Title}} />
         <mat-card-actions>
-            <button mat-button color="primary" (click)="showGenre(movie)">
+            <button mat-button color="primary" (click)="openMoviesDialog(movie, 'genre')">
                 Genre
             </button>
-            <button mat-button color="primary" (click)="showDirector(movie)">
+            <button mat-button color="primary" (click)="openMoviesDialog(movie, 'director')">
                 Director
             </button>
-            <button mat-button color="primary" (click)="showDetails(movie)">
+            <button mat-button color="primary" (click)="openMoviesDialog(movie, 'synopsis')">
                 Synopsis
             </button>
-            <mat-icon>favorite_border</mat-icon> add favorite movie button logic
+            <button mat-icon-button (click)="toggleFavorite(movie)">
+                <mat-icon>{{ movie.isFavorite? 'favorite' : 'favorite_border'}}</mat-icon>
+            </button>
         </mat-card-actions>
     </mat-card>
 </div>
+
+<!-- Dialog Template -->
+<ng-template #dialogTemplate let-data>
+    <h1 mat-dialog-title>{{data.title}}</h1>
+    <div mat-dialog-content>
+        <p *ngIf="data.type === 'genre'">Genre: {{data.content}}</p>
+        <p *ngIf="data.type === 'director'">Director: {{data.content}}</p>
+        <p *ngIf="data.type === 'synopsis'">Synopsis: {{data.content}}</p>
+    </div>
+    <div mat-dialog-actions>
+        <button mat-button mat-dialog-close>Close</button>
+    </div>
+</ng-template>
