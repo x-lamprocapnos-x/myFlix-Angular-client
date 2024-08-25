@@ -1,0 +1,95 @@
+body{
+    background-color: #8f2e2e;
+    background-image: url("https://www.transparenttextures.com/patterns/black-twill.png");
+}
+
+/* Movie card container */
+.movieCardContainer {
+    background: rgba(255, 255, 255, 0.1);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
+    margin: 10px;
+    padding: 10px;
+}
+
+/* General styling for movie card */
+.movieCard {
+    background-color: #d36e6e;
+    flex-basis: calc(25% - 20px);
+    align-content: space-between;
+    display: flex;
+    flex-direction: column;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgb(0, 0, 0, 0.4);
+    overflow: hidden; /* ensures the contents do not overflow the card */
+    margin-bottom: 20px;
+}
+/* Styling for movie image */
+.movieImg {
+    width: 60%;
+    height: auto;
+    align-self: center;
+    padding: 20px;
+    border-radius: 4px;
+    object-fit: cover ; /* ensures the image covers the area without distortion*/
+}
+
+/* Styles for mat-card-actions container */
+.movieCard .mat-card-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    margin-top: 16px;
+}
+
+.movieCard .mat-card-actions .mat-button,
+.movieCard .movie-card-actions .mat-raised-button {
+    margin-bottom: 8px; /* Adjusts spacing between buttons*/
+    padding: 8px 16px;
+    font-size: 14px;
+    width: 100%;
+    text-align: center;
+}
+
+.movieCardButton {
+    background-color: #9E3436 !important; /* override background color*/
+    color: white !important; /* override Text Color */
+    border-radius: 12px; /* Round corners */
+    display: flex;
+    flex-wrap: wrap;
+    padding: 8px 16px;
+    margin: auto;
+}
+
+.navButton {
+    background-color: #9E3436 !important;
+    color: white !important;
+    border-radius: 12px;
+}
+
+@media (max-width: 1200px){
+    .movieCard{
+        flex-basis: calc(25% - 20px);
+
+}
+}
+
+@media (max-width: 900px){
+    .movieCard{
+        flex-basis: calc(33% - 20px);
+    }
+}
+
+@media (max-width: 770px){
+    .movieCard{
+        flex-basis: calc(50% - 20px);
+    }
+}
+
+@media (max-width: 600px) {
+    .movieCard{
+        flex-basis: calc(100% - 20px);
+    }
+}

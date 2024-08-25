@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { catchError, Observable, throwError, map } from 'rxjs';
-import { HttpClient, HttpHeaders, HttpErrorResponse } from
-  '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+
+import { Observable, throwError } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
 
 // Declaring the api url that will funnel data for the client app
 const apiUrl = 'https://movie-selector.onrender.com/';
@@ -39,7 +40,7 @@ export class FetchApiDataService {
 
     return this.http.get(apiUrl + 'movies', {
       headers: new HttpHeaders({
-        Authorization: `Bearer ${this.getToken()}`
+        Authorization: `Bearer ${token}`
       }),
     }).pipe(
       catchError(this.handleError));
@@ -150,7 +151,7 @@ export class FetchApiDataService {
     } else {
       console.error(
         `Error Status code ${error.status},` +
-        `Error body is: ${error.error}`
+        `Error body is: ${JSON.stringify(error.error)}`
       );
     }
     return throwError('Something bad happened; please try again later.');
