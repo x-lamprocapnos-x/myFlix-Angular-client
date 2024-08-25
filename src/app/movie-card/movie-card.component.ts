@@ -40,12 +40,16 @@ export class MovieCardComponent {
   }
 
   openMoviesDialog(movie: any, type: string): void {
+    console.log('Genre', movie.Genre.Name);
     const data = {
       title: movie.Title,
       type: type,
-      content: type === 'genre' ? movie.Genre.Name : type === 'director' ? movie.Director.Name : movie.Description
+      content: type === 'genre' ? movie.Genre.Name
+        : type === 'director' ? movie.Director.map((director: any) => director.Name).join(', ')
+          : movie.Description
     };
-    this.dialog.open(MovieCardComponent, {
+    console.log('Opening dialog with data:', data);
+    this.dialog.open(this.dialogTemplate, {
       width: '600px',
       data: data
     });
