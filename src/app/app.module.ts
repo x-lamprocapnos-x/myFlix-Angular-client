@@ -25,8 +25,8 @@ import { ProfileViewComponent } from './profile-view/profile-view.component';
 const appRoutes: Routes = [
   { path: 'welcome', component: WelcomePageComponent },
   { path: 'movies', component: MovieCardComponent },
-  { path: '', redirectTo: 'welcome', pathMatch: 'prefix' },
-  // { path: 'profile', component: ProfileViewComponent}
+  { path: 'profile', component: ProfileViewComponent },
+  { path: '', redirectTo: 'welcome', pathMatch: 'prefix' }
 ];
 @NgModule({
   declarations: [
