@@ -30,18 +30,20 @@
 
 <!-- Dialog Template -->
 <ng-template #dialogTemplate let-data>
-    <h1 mat-dialog-title><b>{{data.title}}</b></h1>
-    <div mat-dialog-content>
-        <p *ngIf="data.type === 'genre'"><b>Genre:</b> {{ data.content }}</p>
-        <div *ngIf="data.type === 'director'">
-            <b>Directors:</b>
-            <ul>
-                <li *ngFor="let director of data.content.split(', ')">{{ director }}</li>
-            </ul>
+    <div class="dialogContainer">
+        <h1 mat-dialog-title><b>{{data.title}}</b></h1>
+        <div mat-dialog-content>
+            <p *ngIf="data.type === 'genre'"><b>Genre:</b> {{ data.content }}</p>
+            <div *ngIf="data.type === 'director'">
+                <b>Directors:</b>
+                <ul>
+                    <li *ngFor="let director of data.content.split(', ')">{{ director }}</li>
+                </ul>
+            </div>
+            <p *ngIf="data.type === 'synopsis'"><b>Synopsis:</b> {{ data.content }}</p>
         </div>
-        <p *ngIf="data.type === 'synopsis'"><b>Synopsis:</b> {{ data.content }}</p>
-    </div>
-    <div mat-dialog-actions>
-        <button mat-button mat-dialog-close>Close</button>
+        <div mat-dialog-actions>
+            <button mat-button mat-dialog-close>Close</button>
+        </div>
     </div>
 </ng-template>

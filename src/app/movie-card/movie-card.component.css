@@ -1,11 +1,5 @@
-body{
-    background-color: #8f2e2e;
-    background-image: url("https://www.transparenttextures.com/patterns/black-twill.png");
-}
-
 /* Movie card container */
 .movieCardContainer {
-    background: rgba(255, 255, 255, 0.1);
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -69,6 +63,39 @@ body{
     border-radius: 12px;
 }
 
+.dialogContainer {
+    background:rgb(211, 110, 110, 0.5);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0, 0, 0, 0.4;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+}
+
+.dialogContainer h1 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.dialogContainer mat-dialog-content {
+    margin: 20px 0;
+    font-size: 16px;
+}
+
+.dialogContainer mat-dialog-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
+
+.dialogContainer button {
+    background-color: #9E3436 !important;
+    color: white !important;
+    border-radius: 12px;
+    padding: 8px 16px;
+}
+
 @media (max-width: 1200px){
     .movieCard{
         flex-basis: calc(25% - 20px);
@@ -79,6 +106,23 @@ body{
 @media (max-width: 900px){
     .movieCard{
         flex-basis: calc(33% - 20px);
+    }
+
+    .dialogContainer {
+        padding: 15px;
+        font-size: 14px;
+    }
+    
+    .dialogContainer h1 {
+        font-size: 20px;
+    }
+    
+    .dialogContainer mat-dialog-actions {
+        margin-top: 15px;
+    }
+    
+    .dialogContainer button {
+        padding: 6px 12px;
     }
 }
 
