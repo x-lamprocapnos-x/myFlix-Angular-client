@@ -1,19 +1,19 @@
-<div class="profile-container">
-    <h2>{{ userDetails.userName}}'s Profile</h2>
+<div class="profileContainer">
+    <h2>{{ userDetails.username}}'s Profile</h2>
 
-    <div class="profile-details">
+    <div class="profileDetails">
         <p><strong>Email:</strong>{{userDetails.email}}</p>
         <p><strong>Birthday:</strong>{{userDetails.birthDate | date}} </p>
 
-        <button mat-raised-button color="primary" (click)="updateUser()">
+        <button mat-raised-button color="primary" (click)="updateUser()" class="profileViewButton">
             Update Profile
         </button>
-        <button mat-raised-button color="primary" (click)="resetUser()">
+        <button mat-raised-button color="primary" (click)="resetUser()" class="profileViewButton">
             Reset Changes
         </button>
     </div>
 
-    <div class="favorite-movies">
+    <div class="favoriteMovies">
         <h3> Your Favorite Movies</h3>
         <mat-list>
             <mat-list-item *ngFor="let movie of favoriteMovies">
@@ -25,7 +25,7 @@
         </mat-list>
     </div>
 
-    <button mat-raised-button color="accent" (click)="returnToMovies()">
+    <button mat-raised-button color="accent" (click)="returnToMovies()" class="navButton">
         Back to Movies
     </button>
 </div>
