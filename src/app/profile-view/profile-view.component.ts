@@ -14,23 +14,32 @@ export class ProfileViewComponent implements OnInit {
   constructor(
     public fetchApiData: FetchApiDataService,
     public router: Router
-  ) {
+  ) { }
+
+
+
+  ngOnInit(): void {
     const storedUser = localStorage.getItem('user');
     if (storedUser) {
       this.userDetails = JSON.parse(storedUser);
+      if (this.userDetails && this.userDetails.username) {
+        this.getUser();
+      } else {
+        console.error('User name is missing, cannot fetch user details.')
+        this.router.navigate(['welcome']); // Redirect if user details are invalid
+      }
+    } else {
+      console.error('No user found in localStorage')
+      this.router.navigate(['welcome']); // Redirect if no user data is found
     }
   }
 
-  ngOnInit(): void {
-    this.getUser();
-  }
-
   updateUser(): void {
-    this.fetchApiData.editUser(this.userDetails.userName, this.userDetails).subscribe(
+    this.fetchApiData.editUser(this.userDetails.username, this.userDetails).subscribe(
       (result: any) => {
         this.userDetails = {
           ...result,
-          username: this.userDetails.userName,
+          username: this.userDetails.username,
           password: this.userDetails.password,
           token: this.userDetails.token
         };
@@ -64,11 +73,11 @@ export class ProfileViewComponent implements OnInit {
   }
 
   getUser(): void {
-    this.fetchApiData.getUser(this.userDetails.userName).subscribe(
+    this.fetchApiData.getUser(this.userDetails.username).subscribe(
       (result: any) => {
         this.userDetails = {
           ...result,
-          username: result.userName,
+          username: result.username,
           password: this.userDetails.password,
           token: this.userDetails.token
         };
