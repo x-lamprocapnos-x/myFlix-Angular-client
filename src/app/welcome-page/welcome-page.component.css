@@ -1,0 +1,90 @@
+.welcomeContainer {
+    padding: 30px;
+    justify-content: center !important;
+    align-items: center !important;
+    height: 100vh;
+
+}
+
+.welcomePage {
+    width: 100%;
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    margin-left: 20px;
+    background-color: #d36e6e; /* Match background color */
+    border-radius: 12px; /* Round corners to match card styling */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); /* Match card shadow */
+}
+
+/* Welcome Title */
+.welcomePage h1 {
+    font-size: 36px; /* Adjust size for prominence */
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+/* Welcome Buttons */
+.welcomePage button {
+    background-color: #9E3436 !important; /* Match button color */
+    color: white !important; /* Text color to match buttons */
+    border-radius: 12px; /* Round corners to match buttons */
+    padding: 8px 16px;
+    font-size: 16px; /* Match font size to card buttons */
+    margin: 10px; /* Add margin to space out buttons */
+}
+
+.buttonContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.mat-mdc-card,
+.dialogContainer {
+    background:rgb(211, 110, 110, 0.5);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0, 0, 0, 0.4;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+}
+
+.dialogContainer h1 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.dialogContainer mat-dialog-content {
+    margin: 20px 0;
+    font-size: 16px;
+}
+
+.dialogContainer mat-dialog-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
+
+.dialogContainer button {
+    background-color: #9E3436 !important;
+    color: white !important;
+    border-radius: 12px;
+    padding: 8px 16px;
+}
+
+/* Adjust button spacing on smaller screens */
+@media (max-width: 600px) {
+    .welcomePage h1 {
+        font-size: 24px;
+    }
+    .welcomePage button {
+        font-size: 14px; /* Slightly smaller font on small screens */
+        padding: 6px 12px;
+    }
+}
