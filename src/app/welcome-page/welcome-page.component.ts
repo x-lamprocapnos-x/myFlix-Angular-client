@@ -15,15 +15,13 @@ export class WelcomePageComponent implements OnInit {
   // This will open the dialog when the signup button is clicked
   openUserRegistrationDialog(): void {
     this.dialog.open(UserRegistrationFormComponent, {
-      //assign the dialog a width
-      width: '300px'
+      panelClass: 'dialogContainer' // add custom class
     });
   }
 
   openUserLoginDialog(): void {
     this.dialog.open(UserLoginFormComponent, {
-      //asign the dialog a width
-      width: '300px'
+      panelClass: 'dialogContainer' // add custom class
     })
   }
 
