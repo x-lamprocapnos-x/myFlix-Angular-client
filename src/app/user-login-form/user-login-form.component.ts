@@ -25,9 +25,12 @@ export class UserLoginFormComponent implements OnInit {
 
   // Function responsible for sending the form inputs to the backend
   loginUser(): void {
+    console.log(this.userData); //Check the payload
     this.fetchApiData.userLogin(this.userData).subscribe((result) => {
       this.dialogRef.close(); // This will close the modal on success
       console.log(result);
+
+
 
       localStorage.setItem('user', JSON.stringify(result.user));
       localStorage.setItem('token', result.token);
