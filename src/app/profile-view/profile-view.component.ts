@@ -20,26 +20,31 @@ export class ProfileViewComponent implements OnInit {
 
   ngOnInit(): void {
     const storedUser = localStorage.getItem('user');
+    console.log('Stored user data:', storedUser);
+
     if (storedUser) {
-      this.userDetails = JSON.parse(storedUser);
-      if (this.userDetails && this.userDetails.username) {
-        this.getUser();
-      } else {
-        console.error('User name is missing, cannot fetch user details.')
-        this.router.navigate(['welcome']); // Redirect if user details are invalid
+      try {
+        this.userDetails = JSON.parse(storedUser);
+
+        if (this.userDetails && this.userDetails.Username) {
+          this.getUser(); // Fetch user details
+        } else {
+          console.error('User name is missing, cannot fetch user details.')
+          this.router.navigate(['welcome']); // Redirect if user details are invalid
+        }
+      } catch (error) {
+        console.error('Failed to parse user data from localStorage:', error);
+        this.router.navigate(['welcome']); // Redirect if parsing fails
       }
-    } else {
-      console.error('No user found in localStorage')
-      this.router.navigate(['welcome']); // Redirect if no user data is found
     }
   }
 
   updateUser(): void {
-    this.fetchApiData.editUser(this.userDetails.username, this.userDetails).subscribe(
+    this.fetchApiData.editUser(this.userDetails.Username, this.userDetails).subscribe(
       (result: any) => {
         this.userDetails = {
           ...result,
-          username: this.userDetails.username,
+          Username: this.userDetails.Username,
           password: this.userDetails.password,
           token: this.userDetails.token
         };
@@ -73,11 +78,11 @@ export class ProfileViewComponent implements OnInit {
   }
 
   getUser(): void {
-    this.fetchApiData.getUser(this.userDetails.username).subscribe(
+    this.fetchApiData.getUser(this.userDetails.Username).subscribe(
       (result: any) => {
         this.userDetails = {
           ...result,
-          username: result.username,
+          Username: result.Username,
           password: this.userDetails.password,
           token: this.userDetails.token
         };

@@ -80,8 +80,8 @@ export class FetchApiDataService {
   }
 
   // Get user with token attached for access
-  public getUser(userName: string): Observable<any> {
-    return this.http.get(apiUrl + `users/${userName}`, {
+  public getUser(Username: string): Observable<any> {
+    return this.http.get(apiUrl + `users/${Username}`, {
       headers: new HttpHeaders({
         Authorization: `Bearer ${this.getToken()}`
       })
@@ -90,8 +90,8 @@ export class FetchApiDataService {
     );
   }
   // Get Favorite Movies with token attached for access
-  public getFavoriteMovies(userName: string): Observable<any> {
-    return this.http.get(apiUrl + `users/${userName}/movies`, {
+  public getFavoriteMovies(Username: string): Observable<any> {
+    return this.http.get(apiUrl + `users/${Username}/movies`, {
       headers: new HttpHeaders({
         Authorization: `Bearer ${this.getToken()}`
       })
@@ -101,8 +101,8 @@ export class FetchApiDataService {
   }
 
   // Add to Favorite Movies with token attached for access
-  public addFavoriteMovie(userName: string, movieID: string): Observable<any> {
-    return this.http.post(apiUrl + `users/${userName}/movies/${movieID}`, {}, {
+  public addFavoriteMovie(Username: string, movieID: string): Observable<any> {
+    return this.http.post(apiUrl + `users/${Username}/movies/${movieID}`, {}, {
       headers: new HttpHeaders({
         Authorization: `Bearer ${this.getToken()}`
       })
@@ -112,8 +112,8 @@ export class FetchApiDataService {
   }
 
   // Edit User with token attached for access
-  public editUser(userName: string, userDetails: any): Observable<any> {
-    return this.http.put(apiUrl + `users/${userName}`, userDetails, {
+  public editUser(Username: string, userDetails: any): Observable<any> {
+    return this.http.put(apiUrl + `users/${Username}`, userDetails, {
       headers: new HttpHeaders({
         Authorization: `Bearer ${this.getToken()}`
       })
@@ -123,8 +123,8 @@ export class FetchApiDataService {
   }
 
   // Delete User with token attached for access
-  public deleteUser(userName: string): Observable<any> {
-    return this.http.delete(apiUrl + `users/${userName}`, {
+  public deleteUser(Username: string): Observable<any> {
+    return this.http.delete(apiUrl + `users/${Username}`, {
       headers: new HttpHeaders({
         Authorization: `Bearer ${this.getToken()}`
       })
@@ -135,8 +135,8 @@ export class FetchApiDataService {
   }
 
   // Remove a movie from favorite movies with token attached for access
-  public deleteFavoriteMovie(userName: string, movieID: string): Observable<any> {
-    return this.http.delete(apiUrl + `users/${userName}/movies/${movieID}`, {
+  public deleteFavoriteMovie(Username: string, movieID: string): Observable<any> {
+    return this.http.delete(apiUrl + `users/${Username}/movies/${movieID}`, {
       headers: new HttpHeaders({
         Authorization: `Bearer ${this.getToken()}`
       })
