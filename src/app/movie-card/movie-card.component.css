@@ -19,13 +19,15 @@
     box-shadow: 0 4px 8px rgb(0, 0, 0, 0.4);
     overflow: hidden; /* ensures the contents do not overflow the card */
     margin-bottom: 20px;
+    padding: 1em; /* adjusts padding based on font size */
 }
+
 /* Styling for movie image */
 .movieImg {
     width: 60%;
     height: auto;
     align-self: center;
-    padding: 20px;
+    padding: 1em;
     border-radius: 4px;
     object-fit: cover ; /* ensures the image covers the area without distortion*/
 }
@@ -35,14 +37,14 @@
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    margin-top: 16px;
+    margin-top: 1em;
 }
 
 .movieCard .mat-card-actions .mat-button,
 .movieCard .movie-card-actions .mat-raised-button {
     margin-bottom: 8px; /* Adjusts spacing between buttons*/
-    padding: 8px 16px;
-    font-size: 14px;
+    padding: 0.5em 1em; /* responsive padding */
+    font-size: 1em;
     width: 100%;
     text-align: center;
 }
@@ -53,48 +55,51 @@
     border-radius: 12px; /* Round corners */
     display: flex;
     flex-wrap: wrap;
-    padding: 8px 16px;
+    padding: 0.5em 1em;
     margin: auto;
+    font-size: 1em;
 }
 
 .navButton {
     background-color: #9E3436 !important;
     color: white !important;
     border-radius: 12px;
+    padding: 0.5em 1em;
+    font-size: 1em;
 }
 
 .mat-mdc-card,
 .dialogContainer  {
     background:rgb(211, 110, 110, 0.5);
     border-radius: 12px;
-    padding: 20px;
+    padding: 1em;
     box-shadow: 0, 0, 0, 0.4;
     border: 1px solid rgba(255, 255, 255, 0.2);
     color: white;
 }
 
 .dialogContainer h1 {
-    font-size: 24px;
+    font-size: 1.5em; /* responsive font size */
     font-weight: bold;
-    margin-bottom: 10px;
+    margin-bottom: 0.5em;
 }
 
 .dialogContainer mat-dialog-content {
-    margin: 20px 0;
-    font-size: 16px;
+    font-size: 1em; /* responsive font size */
+    margin: 1em 0;
 }
 
 .dialogContainer mat-dialog-actions {
     display: flex;
     justify-content: flex-end;
-    margin-top: 20px;
+    margin-top: 1.em;
 }
 
 .dialogContainer button {
     background-color: #9E3436 !important;
     color: white !important;
     border-radius: 12px;
-    padding: 8px 16px;
+    padding: 0.5em 1em;
 }
 
 @media (max-width: 1200px){
@@ -110,20 +115,20 @@
     }
 
     .dialogContainer {
-        padding: 15px;
+        padding: 1em;
         font-size: 14px;
     }
     
     .dialogContainer h1 {
-        font-size: 20px;
+        font-size: 1.25em;
     }
     
     .dialogContainer mat-dialog-actions {
-        margin-top: 15px;
+        margin-top: 0.75em;
     }
     
     .dialogContainer button {
-        padding: 6px 12px;
+        padding: 0.5em 0.75em;
     }
 }
 
