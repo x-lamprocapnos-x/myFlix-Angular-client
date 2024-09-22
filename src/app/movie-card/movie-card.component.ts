@@ -8,7 +8,7 @@ import { MatDialog } from '@angular/material/dialog';
   templateUrl: './movie-card.component.html',
   styleUrl: './movie-card.component.css'
 })
-export class MovieCardComponent {
+export class MovieCardComponent implements OnInit {
   movies: any[] = [];
 
   @ViewChild('dialogTemplate') dialogTemplate!: TemplateRef<any>;
@@ -28,15 +28,26 @@ export class MovieCardComponent {
   getMovies(): void {
     this.fetchApiData.getAllMovies().subscribe((result: any) => {
       this.movies = result;
-      console.log(this.movies);
 
-      let user = JSON.parse(localStorage.getItem("user") || "");
+      let user = JSON.parse(localStorage.getItem("user") || "null");
+
+      if (!user || !user.FavoriteMovies) {
+        console.warn('User or FavoriteMovies not found');
+        return;
+      }
+
       this.movies.forEach((movie: any) => {
-        movie.isFavorite = user.favoriteMovies.includes(movie._id)
+        movie.isFavorite = user.FavoriteMovies.includes(movie._id) /* check movie._id? or ._Id?*/
       })
+      return this.movies;
     }, error => {
       console.error(error)
     })
+  }
+
+  logout(): void {
+    this.router.navigate(['welcome']);
+    localStorage.removeItem('user');
   }
 
   openMoviesDialog(movie: any, type: string): void {
@@ -62,23 +73,23 @@ export class MovieCardComponent {
 
   toggleFavorite(movie: any): void {
     const user = JSON.parse(localStorage.getItem('user') || '');
-    const isFavorite = user.favoriteMovies.includes(movie._id);
+    const isFavorite = user.FavoriteMovies.includes(movie._id);
 
     if (isFavorite) {
-      this.fetchApiData.deleteFavoriteMovie(user.userName, movie._id).subscribe(
+      this.fetchApiData.deleteFavoriteMovie(user.Username, movie._id).subscribe(
         (result: any) => {
           // update local storage and ui
-          user.favoriteMovies = result.favoriteMovies;
+          user.FavoriteMovies = result.FavoriteMovies;
           localStorage.setItem('user', JSON.stringify(user));
           movie.isFavorite = false;
         }, (error: any) => {
           console.error('Error removing favorite movie:', error);
         });
     } else {
-      this.fetchApiData.addFavoriteMovie(user.userName, movie._id).subscribe(
+      this.fetchApiData.addFavoriteMovie(user.Username, movie._id).subscribe(
         (result: any) => {
           // update local storage and ui
-          user.favoriteMovies = result.favoriteMovies;
+          user.FavoriteMovies = result.FavoriteMovies;
           localStorage.setItem('user', JSON.stringify(user));
           movie.isFavorite = true;
         }, (error: any) => {
