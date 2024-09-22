@@ -1,11 +1,15 @@
 /* Profile container */
 .profileContainer {
-    max-width: 600px;
-    margin: auto;
-    padding: 20px;
-    background-color: #f0f0f0; /* Light gray background */
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #d36e6e;
+    width: 80vw;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); /* Shadow effect */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    margin: 20px auto;
 }
 
 /* Header styling */
@@ -15,8 +19,9 @@
     margin-bottom: 20px;
 }
 
-/* Profile details section */
-.profileDetails {
+/* Profile details form */
+mat-form-field {
+    width: 100%;
     margin-bottom: 20px;
 }
 
@@ -25,45 +30,75 @@
     font-size: 16px;
 }
 
-.profile-details strong {
-    color: #9E3436; /* Accent color */
+.profileDetails strong {
+    color: #9E3436;
 }
 
-/* Button styling */
-.profile-container button {
-    background-color: #9E3436 !important; /* Apply custom background color */
-    color: white !important; /* Ensure text color is white */
-    border-radius: 12px; /* Round corners */
-    padding: 10px 20px;
-    margin-top: 10px;
-    display: block;
-    width: 100%; /* Full-width button */
-}
-
-.profile-container .favorite-movies {
-    margin-top: 20px;
-}
-
-.profile-container .favorite-movies h3 {
-    color: #333;
+/* Profile buttons */
+.profileViewButton,
+.navButton {
+    background-color: #9E3436 !important;
+    color: white !important;
+    border-radius: 12px;
+    padding: 0.5em 1em;
+    margin: 5px;
+    font-size: 1em;
+    width: 100%;
     text-align: center;
 }
 
-.mat-list-item h4 {
-    margin: 0;
-    font-weight: normal;
+/* Favorite Movies Section */
+.favoriteMoviesContainer {
+    width: 100%;
+    margin-top: 30px;
+    background-color: #f7f7f7;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.mat-icon-button {
-    color: #9E3436 !important; /* Delete button color */
+.favoriteMoviesContainer mat-card {
+    
+    background-color: #d36e6e;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    margin-bottom: 20px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-@media (max-width: 600px) {
-    .profile-container {
-        padding: 15px;
-    }
-
-    .profile-container button {
-        padding: 8px 16px;
-    }
+.movieCardContainer {
+    flex-basis: calc(25% - 20px);
+    background-color:#d36e6e;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
 }
+
+/* Movie image styling */
+.movieImg {
+    width: 50%;
+    height: auto;
+    align-self: center;
+    border-radius: 4px;
+    object-fit: cover;
+}
+
+/* Movie card button styling */
+.movieCardButton {
+    background-color: #9E3436 !important;
+    color: white !important;
+    border-radius: 12px;
+    margin-top: 10px;
+    width: 100%;
+    text-align: center;
+}
+
+/* Responsive layout adjustments */
+@media (max-width: 900px) {
+    .favoriteMoviesContainer mat-card {
+        flex-basis: calc(33% - 20px);
+   
+    }}
