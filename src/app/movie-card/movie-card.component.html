@@ -1,6 +1,7 @@
 <div>
     <nav>
-        <button mat-button color="primary" (click)="redirectProfile()" class="navButton">User Profile</button>
+        <button mat-button (click)="redirectProfile()" class="navButton">User Profile</button>
+        <button mat-button (click)="logout()" class="navButton">Logout</button>
     </nav>
     <div class="movieCardContainer">
         <mat-card *ngFor="let movie of movies; let i=index;" class="movieCard">

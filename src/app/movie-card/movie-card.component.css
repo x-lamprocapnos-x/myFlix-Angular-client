@@ -17,7 +17,7 @@
     flex-direction: column;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgb(0, 0, 0, 0.4);
-    overflow: hidden; /* ensures the contents do not overflow the card */
+    overflow: visible; /* ensures the contents do not overflow the card */
     margin-bottom: 20px;
     padding: 1em; /* adjusts padding based on font size */
 }
@@ -64,6 +64,7 @@
     background-color: #9E3436 !important;
     color: white !important;
     border-radius: 12px;
+    margin: 5px;
     padding: 0.5em 1em;
     font-size: 1em;
 }
