@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { FetchApiDataService } from '../fetch-api-data.service';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 
 @Component({
@@ -9,14 +10,15 @@ import { Router } from '@angular/router';
 })
 export class ProfileViewComponent implements OnInit {
   userDetails: any = {};
-  favoriteMovies: any[] = [];
+  FavoriteMovies: any[] = [];
+
+  @ViewChild('dialogTemplate') dialogTemplate!: TemplateRef<any>;
 
   constructor(
     public fetchApiData: FetchApiDataService,
-    public router: Router
+    public router: Router,
+    public dialog: MatDialog
   ) { }
-
-
 
   ngOnInit(): void {
     const storedUser = localStorage.getItem('user');
@@ -45,7 +47,9 @@ export class ProfileViewComponent implements OnInit {
         this.userDetails = {
           ...result,
           Username: this.userDetails.Username,
-          password: this.userDetails.password,
+          Password: this.userDetails.Password,
+          Email: this.userDetails.Email,
+          Birthday: this.userDetails.Birthday,
           token: this.userDetails.token
         };
         localStorage.setItem('user', JSON.stringify(this.userDetails));
@@ -69,8 +73,8 @@ export class ProfileViewComponent implements OnInit {
   getFavoriteMovies(): void {
     this.fetchApiData.getAllMovies().subscribe(
       (result: any) => {
-        this.favoriteMovies = result.filter((movie: any) => {
-          return this.userDetails.favoriteMovies.includes(movie._id)
+        this.FavoriteMovies = result.filter((movie: any) => {
+          return this.userDetails.FavoriteMovies.includes(movie._id)
         });
       }, (error: any) => {
         console.error(error)
@@ -83,8 +87,11 @@ export class ProfileViewComponent implements OnInit {
         this.userDetails = {
           ...result,
           Username: result.Username,
-          password: this.userDetails.password,
-          token: this.userDetails.token
+          Password: this.userDetails.Password, // Keep existing data from local storage
+          Email: this.userDetails.Email,
+          Birthday: this.userDetails.Birthday,
+          token: this.userDetails.token,
+          FavoriteMovies: result.FavoriteMovies || [] // Ensure FavoriteMovies is not null
         };
         localStorage.setItem('user', JSON.stringify(this.userDetails));
         this.getFavoriteMovies();
@@ -93,13 +100,35 @@ export class ProfileViewComponent implements OnInit {
       });
   }
 
-  removeFavoriteMovie(movie: any): void {
+  openMoviesDialog(movie: any, type: string): void {
+    console.log('Genre', movie.Genre.Name);
+    const data = {
+      title: movie.Title,
+      type: type,
+      content: type === 'genre' ? movie.Genre.Name
+        : type === 'director' ? movie.Director.map((director: any) => director.Name).join(', ')
+          : movie.Description
+    };
+    console.log('Opening dialog with data:', data);
+    this.dialog.open(this.dialogTemplate, {
+      width: '600px',
+      data: data
+    });
+  }
+
+  deleteFavoriteMovie(movie: any): void {
     this.fetchApiData.deleteFavoriteMovie(this.userDetails.id, movie._id).subscribe(
       (result: any) => {
-        this.userDetails.favoriteMovies = result.favoriteMovies;
+        this.userDetails.FavoriteMovies = result.FavoriteMovies || [];
         this.getFavoriteMovies();
       }, (error: any) => {
         console.error(error)
       });
   }
+
+  logout(): void {
+    this.router.navigate(['welcome']);
+    localStorage.removeItem('user');
+  }
+
 }
