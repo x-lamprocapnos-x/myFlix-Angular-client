@@ -15,9 +15,8 @@ export class FetchApiDataService {
   constructor(private http: HttpClient) { }
 
   // get token
-  private getToken(): string {
-    const user = localStorage.getItem('user');
-    return user ? JSON.parse(user).token : '';
+  private getToken(): string | null {
+    return localStorage.getItem('token');
   }
 
   // User registration
