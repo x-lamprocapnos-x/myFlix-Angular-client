@@ -1,3 +1,8 @@
+/**
+ * This component is responsible for displaying the user's profile,
+ * including favorite movies and user details. It also allows the user
+ * to update their information and interact with favorite movies.
+ */
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { FetchApiDataService } from '../fetch-api-data.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -9,17 +14,29 @@ import { Router } from '@angular/router';
   styleUrl: './profile-view.component.css'
 })
 export class ProfileViewComponent implements OnInit {
+
+  /** Stores user details fetched from the API or local storage. */
   userDetails: any = {};
+
+  /** Stores the list of user's favorite movies. */
   FavoriteMovies: any[] = [];
 
+  /** Template reference for the dialog to display movie details. */
   @ViewChild('dialogTemplate') dialogTemplate!: TemplateRef<any>;
 
+  /**
+ * Constructor for the ProfileViewComponent.
+ * @param fetchApiData The service to fetch data from the API.
+ * @param router The Angular Router to handle navigation.
+ * @param dialog The Angular Material Dialog service to open dialogs.
+ */
   constructor(
     public fetchApiData: FetchApiDataService,
     public router: Router,
     public dialog: MatDialog
   ) { }
 
+  /** Lifecycle hook that runs when the component is initialized. */
   ngOnInit(): void {
     const storedUser = localStorage.getItem('user');
     console.log('Stored user data:', storedUser);
@@ -29,18 +46,19 @@ export class ProfileViewComponent implements OnInit {
         this.userDetails = JSON.parse(storedUser);
 
         if (this.userDetails && this.userDetails.Username) {
-          this.getUser(); // Fetch user details
+          this.getUser();
         } else {
           console.error('User name is missing, cannot fetch user details.')
-          this.router.navigate(['welcome']); // Redirect if user details are invalid
+          this.router.navigate(['welcome']);
         }
       } catch (error) {
         console.error('Failed to parse user data from localStorage:', error);
-        this.router.navigate(['welcome']); // Redirect if parsing fails
+        this.router.navigate(['welcome']);
       }
     }
   }
 
+  /** Updates the user information in the API and local storage. */
   updateUser(): void {
     this.fetchApiData.editUser(this.userDetails.Username, this.userDetails).subscribe(
       (result: any) => {
@@ -59,6 +77,7 @@ export class ProfileViewComponent implements OnInit {
       })
   }
 
+  /** Resets the user information by reloading data from local storage. */
   resetUser(): void {
     const storedUser = localStorage.getItem('user');
     if (storedUser) {
@@ -66,10 +85,13 @@ export class ProfileViewComponent implements OnInit {
     }
   }
 
+
+  /** Redirects the user back to the movies list. */
   returnToMovies(): void {
     this.router.navigate(['movies']);
   }
 
+  /** Fetches the user's favorite movies from the API. */
   getFavoriteMovies(): void {
     this.fetchApiData.getAllMovies().subscribe(
       (result: any) => {
@@ -81,17 +103,18 @@ export class ProfileViewComponent implements OnInit {
       });
   }
 
+  /** Fetches the user details from the API. */
   getUser(): void {
     this.fetchApiData.getUser(this.userDetails.Username).subscribe(
       (result: any) => {
         this.userDetails = {
           ...result,
           Username: result.Username,
-          Password: this.userDetails.Password, // Keep existing data from local storage
+          Password: this.userDetails.Password,
           Email: this.userDetails.Email,
           Birthday: this.userDetails.Birthday,
           token: this.userDetails.token,
-          FavoriteMovies: result.FavoriteMovies || [] // Ensure FavoriteMovies is not null
+          FavoriteMovies: result.FavoriteMovies || []
         };
         localStorage.setItem('user', JSON.stringify(this.userDetails));
         this.getFavoriteMovies();
@@ -100,6 +123,11 @@ export class ProfileViewComponent implements OnInit {
       });
   }
 
+  /**
+  * Opens a dialog to display additional details about a movie (genre, director, description).
+  * @param movie The movie to display details for.
+  * @param type The type of information to display ('genre', 'director', or 'description').
+  */
   openMoviesDialog(movie: any, type: string): void {
     console.log('Genre', movie.Genre.Name);
     const data = {
@@ -116,6 +144,10 @@ export class ProfileViewComponent implements OnInit {
     });
   }
 
+  /**
+  * Removes a movie from the user's list of favorite movies.
+  * @param movie The movie to remove from favorites.
+  */
   deleteFavoriteMovie(movie: any): void {
     this.fetchApiData.deleteFavoriteMovie(this.userDetails.id, movie._id).subscribe(
       (result: any) => {
@@ -125,7 +157,7 @@ export class ProfileViewComponent implements OnInit {
         console.error(error)
       });
   }
-
+  /** Logs the user out, clears local storage, and redirects to the welcome page. */
   logout(): void {
     this.router.navigate(['welcome']);
     localStorage.removeItem('user');
