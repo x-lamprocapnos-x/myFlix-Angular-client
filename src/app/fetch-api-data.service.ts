@@ -204,7 +204,7 @@ export class FetchApiDataService {
 
   /**
   * Handles errors that may occur during HTTP requests.
-  * @param error - The HTTP error response.
+  * @param error - The HTTP error response. 
   * @returns A formatted error message.
   */
   private handleError(error: HttpErrorResponse): any {
