@@ -15,6 +15,10 @@
             </mat-form-field>
             <mat-form-field>
                 <label>Password: </label>
+                <input matInput [(ngModel)]="userDetails.Password" placeholder="Password" type="password" name="Password" required>
+            </mat-form-field>
+            <mat-form-field>
+                <label>Email: </label>
                 <input matInput [(ngModel)]="userDetails.email" placeholder="Email" name="Email" required>
             </mat-form-field>
             <mat-form-field>
