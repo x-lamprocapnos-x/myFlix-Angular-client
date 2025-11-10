@@ -149,9 +149,12 @@ export class ProfileViewComponent implements OnInit {
   * @param movie The movie to remove from favorites.
   */
   deleteFavoriteMovie(movie: any): void {
-    this.fetchApiData.deleteFavoriteMovie(this.userDetails.id, movie._id).subscribe(
+    console.log('Deleting favorite for user:', this.userDetails.Username, 'Movie ID:', movie._id);
+
+    this.fetchApiData.deleteFavoriteMovie(this.userDetails.Username, movie._id).subscribe(
       (result: any) => {
         this.userDetails.FavoriteMovies = result.FavoriteMovies || [];
+        localStorage.setItem('user', JSON.stringify(this.userDetails));
         this.getFavoriteMovies();
       }, (error: any) => {
         console.error(error)
