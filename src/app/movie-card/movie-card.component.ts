@@ -69,17 +69,36 @@ export class MovieCardComponent implements OnInit {
    * @param type - The type of information to display ('genre', 'director', or 'description').
    */
   openMoviesDialog(movie: any, type: string): void {
-    console.log('Genre', movie.Genre.Name);
-    const data = {
-      title: movie.Title,
-      type: type,
-      content: type === 'genre' ? movie.Genre.Name
-        : type === 'director' ? movie.Director.map((director: any) => director.Name).join(', ')
-          : movie.Description
-    };
+    let title = '';
+    let content = '';
+
+    switch (type) {
+      case 'genre':
+        title = `Genre: ${movie.Genre.Name}`;
+        content = movie.Genre.Description;
+        console.log('Genre:', movie.Genre.Name);
+        break;
+
+      case 'director':
+        title = `Director: ${movie.Director.Name}`;
+        content = movie.Director.map((dir:any) => dir.Bio).join(', ');
+        console.log('Director:', movie.Director.Name);
+        break;
+
+      case 'synopsis':
+        title = `Synopsis of ${movie.Title}`;
+        content = movie.Description;
+        console.log('Synopsis:', movie.Description);
+        break;
+
+      default:
+        console.warn('Unknown dialog type:', type);
+        return;
+    }
+
     this.dialog.open(this.dialogTemplate, {
       width: '600px',
-      data: data
+      data: { title, content, type }
     });
   }
 
